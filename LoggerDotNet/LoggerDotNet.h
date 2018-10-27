@@ -9,11 +9,20 @@ using namespace System::Text;
 
 namespace LoggerDotNet
 {
+	public enum class LogLevel
+	{
+		logNOTHING = 0,
+		logERROR = 1,
+		logWARNING = 2,
+		logINFO = 3,
+		logDEBUG = 4,
+	};
+
 	public ref class CLog : ManagedObject<Logger::Log>
 	{
 	public:
 		CLog() : ManagedObject(new Logger::Log()) {};
-		static void log(Logger::TLogLevel level, String^ message);
+		static void log(LogLevel level, String^ message);
 		static property String^ logFilePath
 		{
 		public:
@@ -26,16 +35,16 @@ namespace LoggerDotNet
 				Logger::Log::plogFilePath = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(value).ToPointer();
 			}
 		}
-		static property Logger::TLogLevel logLevel
+		static property LogLevel logLevel
 		{
 		public:
-			Logger::TLogLevel get()
+			    LogLevel get()
 				{
-					return Logger::Log::logLevel;
+					return static_cast<LogLevel>( Logger::Log::logLevel);
 				}
-			void set(Logger::TLogLevel value)
+			void set(LogLevel value)
 				{
-				Logger::Log::logLevel = value;
+				Logger::Log::logLevel = static_cast<Logger::TLogLevel>(value);
 				}
 		}
 	};

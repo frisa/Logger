@@ -5,11 +5,11 @@ namespace Logger
 {
 	enum TLogLevel
 	{
-		logNOTHING,
-		logERROR,
-		logWARNING,
-		logINFO,
-		logDEBUG,
+		logNOTHING = 0,
+		logERROR = 1,
+		logWARNING = 2,
+		logINFO = 3,
+		logDEBUG = 4,
 	};
 
 	class Log
